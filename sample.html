@@ -1,0 +1,23 @@
+<!DOCTYPE html>  
+  
+<html>  
+    <head>  
+        <title>Sampler</title>  
+        <meta charset="utf-8">  
+        <script src="./jquery.min.js"></script>  
+        <script>  
+		    var ctx, canvas;
+            $(document).ready(function() {  
+                canvas = document.getElementById("myCanvas");  
+                ctx = canvas.getContext("2d");  
+            });  
+        </script>  
+		<script src="./sample.js"></script>
+    </head>  
+  
+    <body>  
+        <canvas id="myCanvas" width="700" height="700">  
+            <!-- Insert fallback content here -->  
+        </canvas>  
+    </body>  
+</html>  
