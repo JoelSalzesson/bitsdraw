@@ -22,6 +22,8 @@ var map = [];
 var inHandPaint = false;
 var BLACK = "rgba(0,0,0,255)", WHITE = "rgba(255,255,255,255)";
 
+var urlarg = window.location.search.substring(1)
+
 function initMap() {
 	for(var i = 0; i < MAP_SZ; ++i) {
 		map[i] = []
@@ -41,8 +43,8 @@ function copyMap(from) {
 	return to;
 }
 	
-function drawGrid() {
-
+function drawGrid() 
+{
 	for (var x = 0; x < xend ; x += zoom) {
 		ctx.moveTo(x, 0);
 		ctx.lineTo(x, canvas.height);	
@@ -194,6 +196,7 @@ function updateValues(skipCp) {
 		updateCpValues()
 }
 
+// large text area at the bottom
 function updateCpValues() {
 	var v = ""
 	for(var y = 0; y < BITS_HEIGHT; ++y) {
@@ -230,8 +233,18 @@ function loadImage() {
 }
 
 $(image).load(function() {  
-	loadImage();
+	if (urlarg == "") {
+		loadImage();
+	}
 });  
+
+function argToMap(arg) {
+	var nums = arg.split(/[&,]/);
+	for(var i = 0; i < nums.length; ++i) {
+		setTextFor(i, nums[i])
+	}
+	updateCpValues();
+}
 
 
 function createElem(kind, type, value, x, y, click) {
@@ -296,6 +309,7 @@ function cpEditInput() {
 
 
 window.onload = function(){
+	//alert(urlarg)
 	initCoord();
     createInput("button", "numbers", xend + 20, 10, function(){
         numbersDisp = (numbersDisp + 1) % 3;
@@ -345,6 +359,11 @@ window.onload = function(){
 	canvas.onmousedown = mouseDown;
 	document.onmouseup = mouseUp;
 	document.onmousemove = mouseMove;
+	
+	initMap();
+	if (urlarg != "")
+		argToMap(urlarg)
+	draw()
 }
 
 
