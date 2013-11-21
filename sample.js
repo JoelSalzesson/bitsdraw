@@ -308,6 +308,11 @@ function cpEditInput() {
 	draw(false, true)
 }
 
+function makeURL() {
+	var s = window.location.origin + window.location.pathname + "?" + cpedit.value;
+	return s;
+}
+
 
 initMap();	
 
@@ -347,6 +352,10 @@ window.onload = function()
         initMap()
 		draw()
     });	
+	
+	createInput("button", "URL", xend + 90, 70, function() {
+		window.prompt("The URL:", makeURL());
+	});
 
 	var fload = createInput("file", null, xend + 90, 35, null);
 	fload.onchange = function() {
