@@ -24,6 +24,7 @@ var BLACK = "rgba(0,0,0,255)", WHITE = "rgba(255,255,255,255)";
 
 var urlarg = window.location.search.substring(1)
 
+
 function initMap() {
 	for(var i = 0; i < MAP_SZ; ++i) {
 		map[i] = []
@@ -308,8 +309,11 @@ function cpEditInput() {
 }
 
 
-window.onload = function(){
-	//alert(urlarg)
+initMap();	
+
+window.onload = function()
+{
+	//alert("X" + urlarg +"X")	
 	initCoord();
     createInput("button", "numbers", xend + 20, 10, function(){
         numbersDisp = (numbersDisp + 1) % 3;
@@ -360,10 +364,11 @@ window.onload = function(){
 	document.onmouseup = mouseUp;
 	document.onmousemove = mouseMove;
 	
-	initMap();
-	if (urlarg != "")
+
+	if (urlarg != "") {
 		argToMap(urlarg)
-	draw()
+		draw()
+	}
 }
 
 
